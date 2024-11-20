@@ -30,5 +30,13 @@ This example demonstrates spoofind through two ways -- Stealing cookies programm
 ## For you to answer
 
 1. Briefly explain the spoofing vulnerability in **insecure.ts**.
+
+The `httpOnly` flag for the session cookie is set to `false`, which allows client-side scripts to access the cookie. This makes the application vulberable to the cross-site scripting attacks and session hijacking
+
 2. Briefly explain different ways in which vulnerability can be exploited.
+
+An attacker could inject malicious JavaScript code that reads the session cookie and sends it to a remote server. Since the cookie is accessible to client-side scripts, an attacker could also steal the session ID and impersonate the user. Lastly, without proper encryption, an attacker could intercept and modify the session data in transit.
+
 3. Briefly explain why **secure.ts** does not have the spoofing vulnerability in **insecure.ts**.
+
+secure.ts implements several security measures. The `httpOnly` flag is set to `true` preventing client-side access to the session cookie. The `sameSite` attribute is set to `true`, which helps prevent cross-site request forgery attacks. The session secret is passed as a command-line argument rather than being hardcoded, improving security. 
